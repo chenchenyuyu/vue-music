@@ -24,6 +24,9 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // This rule enforces at least one newline (or absence thereof) at the end of non-empty files.
+    'eol-last':0,
+    'space-before-function-paren':0
   }
 }
