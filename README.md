@@ -4,7 +4,12 @@
 
 # PLAN
 1. 项目结构的搭建，图标字体，公共资源的准备
+
 2. 头部组件,完成路由配置
+
+3. 完成推荐页面，jsonp抓取数据，引入vuex
+
+* promise封装jsonp, jsonp抓取数据
 
 ## Build Setup
 
