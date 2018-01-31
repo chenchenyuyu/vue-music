@@ -38,4 +38,4 @@ npm run build
 
 # License
 
-(MIT)[https://github.com/chenchenyuyu/vue-music/blob/master/LICENSE]
+[MIT](https://github.com/chenchenyuyu/vue-music/blob/master/LICENSE)
