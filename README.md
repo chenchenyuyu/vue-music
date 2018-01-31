@@ -2,7 +2,7 @@
 
 > 一款vue版本的音乐播放器
 
-# vue-music 技术栈：
+# Music：
 
 * vue2.0
 * vuex
@@ -35,3 +35,7 @@ npm run dev
 * 打包编译生成静态资源
 
 npm run build
+
+# License
+
+(MIT)[https://github.com/chenchenyuyu/vue-music/blob/master/LICENSE]
