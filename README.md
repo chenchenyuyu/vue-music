@@ -7,6 +7,7 @@
 * vue2.0
 * vuex
 * vue-router
+* webpack3.0
 * axios
 * less
 
