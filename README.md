@@ -2,7 +2,16 @@
 
 > 一款vue版本的音乐播放器
 
-# PLAN
+# vue-music 技术栈：
+
+* vue2.0
+* vuex
+* vue-router
+* axios
+* less
+
+# Plan
+
 1. 项目结构的搭建，图标字体，公共资源的准备
 
 2. 头部组件,完成路由配置
@@ -13,19 +22,16 @@
 
 * 注意webpack3.0中的配置和数据抓取设置，解决before选项
 
+# Usage
 
-## Build Setup
+* 项目根目录安装依赖
 
-``` bash
-# install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+* 浏览器访问localhost:8000
+
 npm run dev
 
-# build for production with minification
-npm run build
+* 打包编译生成静态资源
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+npm run build
