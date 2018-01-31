@@ -11,6 +11,9 @@
 
 * promise封装jsonp, jsonp抓取数据
 
+* 注意webpack3.0中的配置和数据抓取设置，解决before选项
+
+
 ## Build Setup
 
 ``` bash

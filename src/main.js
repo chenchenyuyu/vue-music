@@ -15,7 +15,7 @@ fastclick.attach(document.body)
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')
 })
-
+// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
 /* eslint-disable no-new */
 // vue2.0独立构建
 // new Vue({
