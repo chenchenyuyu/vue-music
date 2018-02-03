@@ -1,12 +1,13 @@
 # vue-music
 
-> 一款vue版本的音乐播放器
+> 一款vue版本的音乐播放器,本项目只供交流和学习使用！
 
-# vue-music 技术栈：
+# Music：
 
 * vue2.0
 * vuex
 * vue-router
+* webpack3.0
 * axios
 * less
 
@@ -37,3 +38,7 @@ npm run dev
 * 打包编译生成静态资源
 
 npm run build
+
+# License
+
+[MIT](https://github.com/chenchenyuyu/vue-music/blob/master/LICENSE)
