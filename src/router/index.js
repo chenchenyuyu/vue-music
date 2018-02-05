@@ -7,7 +7,7 @@ import Search from '../components/search/search'
 // 注册router组件，配置路由
 Vue.use(Router)
 
-// 根路由跳转默认跳转到Recommend，实现页面跳转，路由高亮显示
+// 根路由redirect跳转到Recommend，实现页面跳转，路由高亮显示，实现颜色切换
 export default new Router({
   routes: [
     {

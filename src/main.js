@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 fastclick.attach(document.body)
 // 所有点击去除几秒的延迟
 
+// 注册图片懒加载组件
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')
 })

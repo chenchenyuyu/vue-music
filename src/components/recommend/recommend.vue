@@ -1,8 +1,10 @@
 <template>
   <div class="recommend" ref="recommend">
+    <!-- :data传入discList歌单数据。高度变化，实现数据的变化. -->
     <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
+          <!-- fastclick与better-scroll冲突的时候，通过img多定义class(class=needsclick)解决 -->
           <slider>
             <div v-for="(item, index) in recommends" :key="index">
               <a :href="item.linkUrl">
@@ -11,6 +13,7 @@
             </div>
           </slider>
         </div>
+        <!-- img v-lazy实现图片懒加载 -->
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>

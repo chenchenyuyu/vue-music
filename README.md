@@ -17,7 +17,7 @@
 
 2. 头部组件,完成路由配置
 
-3. 完成推荐页面，jsonp抓取数据，引入vuex
+3. 完成推荐页面，jsonp抓取数据，引入vuex,vue-lazyload实现图片懒加载
 
 * promise封装jsonp, jsonp抓取数据
 

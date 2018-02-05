@@ -8,6 +8,7 @@
 import BScroll from 'better-scroll'
 
 export default {
+  // scroll组件实现抽象，数据初始化
   props: {
     /**
      * 1 滚动的时候会派发scroll事件，会截流。
@@ -23,7 +24,7 @@ export default {
      */
     click: {
       type: Boolean,
-      default: true
+      default: true // fastclick和scroll冲突,列表默认可以点击
     },
     /**
      * 是否开启横向滚动
@@ -137,6 +138,7 @@ export default {
       this.scroll && this.scroll.enable()
     },
     refresh() {
+      // 实现数据的更新，高度的重新计算
       // 代理better-scroll的refresh方法
       this.scroll && this.scroll.refresh()
     },
