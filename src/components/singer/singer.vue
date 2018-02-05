@@ -41,7 +41,7 @@ export default {
     _getSingerList() {
       getSingerList().then(res => {
         if (res.code === ERR_OK) {
-          console.log('singerList', res.data);
+          console.log('singerList', res.data)
           this.singers = this._normalizeSinger(res.data.list)
         }
       })
