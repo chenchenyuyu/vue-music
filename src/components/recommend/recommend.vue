@@ -70,13 +70,13 @@ export default {
         this.checkloaded = true
         this.$refs.scroll.refresh()
       }
-    },  
+    },
     // 点击列表项路由跳转，跳转到推荐页面的详情
-    selectItem(item) {    
+    selectItem(item) {
       this.$router.push({
         path: `/recommend/${item.dissid}`
       })
-      this.setDisc(item)  //commit setDisc
+      this.setDisc(item) // commit setDisc
     },
     _getRecommend() {
       getRecommend().then(res => {
