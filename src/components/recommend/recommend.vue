@@ -70,12 +70,13 @@ export default {
         this.checkloaded = true
         this.$refs.scroll.refresh()
       }
-    },
-    selectItem(item) {
+    },  
+    // 点击列表项路由跳转，跳转到推荐页面的详情
+    selectItem(item) {    
       this.$router.push({
         path: `/recommend/${item.dissid}`
       })
-      this.setDisc(item)
+      this.setDisc(item)  //commit setDisc
     },
     _getRecommend() {
       getRecommend().then(res => {
@@ -91,6 +92,8 @@ export default {
         }
       })
     },
+    // 使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）
+    // mapMutations将this.setDisc映射为this.$store.commit('SET_DISC')
     ...mapMutations({
       setDisc: 'SET_DISC'
     })
