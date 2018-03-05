@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     _getSongList() {
-      console.log('dissid', this.disc.dissid)      
       if (!this.disc.dissid) {
         this.$router.push('/recommend')
         return

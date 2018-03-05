@@ -30,6 +30,7 @@ export default {
   created() {
     this._getDetail()
     console.log('singerList', this._getDetail())
+    console.log('singer', this.singer.avatar)
   },
   methods: {
     _getDetail() {

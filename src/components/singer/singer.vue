@@ -25,6 +25,7 @@ export default {
   },
   created() {
     this._getSingerList()
+    console.log('this._getSingerList', this._getSingerList())
   },
   methods: {
     handlePlaylist(playlist) {
