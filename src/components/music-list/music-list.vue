@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     bgStyle() {
-       return `background-image:url(${this.bgImage})`
+      return `background-image:url(${this.bgImage})`
     }
   },
   created() {
