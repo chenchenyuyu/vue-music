@@ -18,7 +18,7 @@ export default {
     bgImage() {
       return this.disc.imgurl
     },
-    // store.getters.disc 
+    // store.getters.disc store中派生出状态
     ...mapGetters(['disc'])
   },
   data() {
@@ -28,9 +28,8 @@ export default {
   },
   created() {
     this._getSongList()
-    console.log('songList', this._getSongList())
-    console.log('getSongList', getSongList())
-    console.log('disc', this.disc)
+    // console.log('songList', this._getSongList())
+    // console.log('getSongList', getSongList())
   },
   methods: {
     _getSongList() {
@@ -39,12 +38,14 @@ export default {
         this.$router.push('/recommend')
         return
       }
-      getSongList(this.disc.dissid).then(res => {
+      getSongList(this.disc.dissid).then((res) => {
+        // console.log('res-songList', res)
         if (res.code === ERR_OK) {
           this.songs = this._normalizeSongs(res.cdlist[0].songlist)
         }
       })
     },
+    // 处理数据
     _normalizeSongs(list) {
       let ret = []
       list.forEach(musicData => {
