@@ -38,6 +38,7 @@ export default {
   },
   created() {
     this._getTopList()
+    console.log('this._getTopList', this._getTopList())
   },
   methods: {
     handlePlaylist(playlist) {
