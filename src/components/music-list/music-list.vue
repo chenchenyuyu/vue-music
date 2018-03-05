@@ -1,7 +1,7 @@
 <template>
   <div class="music-list">
-    <div class="back">
-      <i class="back-icon"></i>
+    <div class="back" @click="back">
+      <i class="icon-back"></i>
     </div>
     <h1 class="title" v-html="title"></h1>
     <div class="bg-image" :style="bgStyle" ref="bgImage">
@@ -30,9 +30,13 @@
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
 import SongList from 'base/song-list/song-list'
-import { prefixStyle } from 'common/js/dom'
-import { playlistMixin } from 'common/js/mixin'
-import { mapActions } from 'vuex'
+import {prefixStyle} from 'common/js/dom'
+import {playlistMixin} from 'common/js/mixin'
+import {mapActions} from 'vuex'
+
+const RESERVED_HEIGHT = 40
+const transform = prefixStyle('transform')
+const backdrop = prefixStyle('backdrop-filter')
 
 export default {
   // 混入对象，重复利用
@@ -62,7 +66,7 @@ export default {
   },
   computed: {
     bgStyle() {
-      return `background-image(${this.bgImage})`
+       return `background-image:url(${this.bgImage})`
     }
   },
   created() {
