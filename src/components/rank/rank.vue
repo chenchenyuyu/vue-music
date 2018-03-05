@@ -31,13 +31,14 @@ import { playlistMixin } from 'common/js/mixin'
 import { mapMutations } from 'vuex'
 export default {
   mixins: [playlistMixin],
-
   data() {
     return {
       topList: []
     }
   },
-  created() {},
+  created() {
+    this._getTopList()
+  },
   methods: {
     handlePlaylist(playlist) {
       const bottom = playlist.length > 0 ? '60px' : ''
@@ -59,7 +60,7 @@ export default {
       })
     },
     ...mapMutations({
-      setTopList: SET_TOP_LIST
+      setTopList: 'SET_TOP_LIST'
     })
   },
   watch: {
