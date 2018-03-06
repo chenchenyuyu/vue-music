@@ -38,7 +38,6 @@ export default {
   },
   created() {
     this._getTopList()
-    console.log('this._getTopList', this._getTopList())
   },
   methods: {
     handlePlaylist(playlist) {
@@ -48,7 +47,7 @@ export default {
       this.$refs.toplist.refresh()
     },
     selectItem(item) {
-      this.$souter.push({
+      this.$router.push({
         path: `/rank/${item.id}`
       })
       this.setTopList(item)
