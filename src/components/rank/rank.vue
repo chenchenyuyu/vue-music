@@ -1,13 +1,13 @@
 <template>
 <div class="rank" ref="rank">
-  <scroll :data="topList" class="topList" ref="topList">
+  <scroll :data="topList" class="toplist" ref="toplist">
      <ul>
-       <li @click="selectItem(item)" class="item" v-for="(index, item) in toplist" :key="index">
+       <li @click="selectItem(item)" class="item" v-for="item in topList">
         <div class="icon">
          <img width="100" height="100" v-lazy="item.picUrl"/>
         </div>
          <ul class="songList">
-           <li class="song"  v-for="(song,index) in item.songList" :key="index">
+           <li class="song"  v-for="(song,index) in item.songList">
              <span>{{index + 1}}</span>
              <span>{{song.songname}}-{{song.singername}}</span>
             </li>
@@ -108,7 +108,7 @@ export default {
         height: 100px;
       }
 
-      .songlist {
+      .songList {
         flex: 1;
         display: flex;
         flex-direction: column;
