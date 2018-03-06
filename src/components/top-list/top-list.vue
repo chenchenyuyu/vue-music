@@ -28,7 +28,6 @@ export default {
   created() {
     this._getMusicList()
     console.log('this._getMusicList', this._getMusicList())
-    console.log('this.songs', this.songs[0].image)
   },
   data() {
     return {
