@@ -42,7 +42,16 @@ import SearchBox from 'base/search-box/search-box'
 import SearchList from 'base/search-list/search-list'
 
 export default {
-  
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    Scroll,
+    SearchBox,
+    SearchList
+  }
 }
 </script>
 
