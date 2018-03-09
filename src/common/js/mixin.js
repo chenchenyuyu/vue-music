@@ -1,4 +1,4 @@
-import {mapGetters} from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export const playlistMixin = {
   computed: {
@@ -21,5 +21,38 @@ export const playlistMixin = {
     handlePlaylist() {
       throw new Error('component must implement handlePlaylist method')
     }
+  }
+}
+
+// 歌曲搜索的逻辑处理
+export const searchMixin = {
+  data() {
+    return {
+      query: '',
+      refreshDelay: 120
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'searchHistory'
+    ])
+  },
+  mathods: {
+    onQueryChange(query) {
+      this.query = query
+    },
+    blurInput() {
+      this.$refs.searchBox.blur()
+    },
+    addQuery(query) {
+      this.$refs.searchBox.setQuery(query)
+    },
+    saveSearch() {
+      this.saveSearchHistory(this.query)
+    },
+    ...mapActions([
+      'saveSearchHistory',
+      'deleteSearchHistory'
+    ])
   }
 }
