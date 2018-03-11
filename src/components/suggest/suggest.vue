@@ -1,29 +1,30 @@
 <template>
-  <div class="suggest">
-     <scroll
-          ref="suggest"
+  <scroll ref="suggest"
           class="suggest"
           :data="result"
           :pullup="pullup"
           :beforeScroll="beforeScroll"
           @scrollToEnd="searchMore"
           @beforeScroll="listScroll"
-     >
-       <ul class="suggest-list">
-         <li class="suggest-item" @click="selectItem(item)">
-            <div class="icon"><i :class="getIconCls(item)"></i></div>
-            <div class="name"><p class="text" v-html="getDisplayName(item)"></p></div>
-         </li>
-         <loading v-show="hasMore" title=""></loading>
-       </ul>
-       <div class="no-result-wrapper" v-show="!hasMore && !result.length">
-         <no-result title="抱歉，暂无搜索结果"></no-result>
-       </div>
-     </scroll>
-  </div>
+  >
+    <ul class="suggest-list">
+      <li @click="selectItem(item)" class="suggest-item" v-for="item in result">
+        <div class="icon">
+          <i :class="getIconCls(item)"></i>
+        </div>
+        <div class="name">
+          <p class="text" v-html="getDisplayName(item)"></p>
+        </div>
+      </li>
+      <loading v-show="hasMore" title=""></loading>
+    </ul>
+    <div v-show="!hasMore && !result.length" class="no-result-wrapper">
+      <no-result title="抱歉，暂无搜索结果"></no-result>
+    </div>
+  </scroll>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
 import NoResult from 'base/no-result/no-result'
@@ -37,6 +38,16 @@ const TYPE_SINGER = 'singer'
 const perpage = 20
 
 export default {
+  props: {
+    showSinger: {
+      type: Boolean,
+      default: true
+    },
+    query: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       page: 1,
@@ -46,19 +57,9 @@ export default {
       result: []
     }
   },
-  props: {
-    showSinger: {
-      type: Boolean,
-      default: true
-    },
-    query: {
-      type: String,
-      default: ' '
-    }
-  },
   methods: {
     refresh() {
-      this.refs.suggest.refresh()
+      this.$refs.suggest.refresh()
     },
     search() {
       this.page = 1
@@ -71,7 +72,6 @@ export default {
         }
       })
     },
-    // hasMore存在
     searchMore() {
       if (!this.hasMore) {
         return
@@ -79,8 +79,7 @@ export default {
       this.page++
       search(this.query, this.page, this.showSinger, perpage).then(res => {
         if (res.code === ERR_OK) {
-          this.result = this._genResult(res.data)
-          // 检查是否有“多余”数据
+          this.result = this.result.concat(this._genResult(res.data))
           this._checkMore(res.data)
         }
       })
@@ -101,7 +100,7 @@ export default {
       } else {
         this.insertSong(item)
       }
-      this.$emit('select')
+      this.$emit('select', item)
     },
     getDisplayName(item) {
       if (item.type === TYPE_SINGER) {
@@ -148,15 +147,12 @@ export default {
     ...mapMutations({
       setSinger: 'SET_SINGER'
     }),
-    ...mapActions([
-      'insertSong'
-    ])
+    ...mapActions(['insertSong'])
   },
   watch: {
-    // 数据变动，重新查找
-     query(newQuery) {
+    query(newQuery) {
       this.search(newQuery)
-     }
+    }
   },
   components: {
     Scroll,
@@ -166,7 +162,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped lang="stylus">
 @import '~common/stylus/variable';
 @import '~common/stylus/mixin';
 

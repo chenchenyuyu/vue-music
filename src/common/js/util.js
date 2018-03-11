@@ -1,4 +1,4 @@
-// 函数防抖动
+// 函数防抖动, 优化代码
 export function debounce(func, delay) {
   let timer
   return function (...args) {

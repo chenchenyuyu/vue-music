@@ -1,48 +1,45 @@
 <template>
   <div class="search">
-    <div class="search-box-wapper">
+    <div class="search-box-wrapper">
       <search-box ref="searchBox" @query="onQueryChange"></search-box>
     </div>
-    <div class="shortcut-wapper" v-show="!query">
-      <div class="shortcut">
-        <scroll :refreshDelay="refreshDelay" ref="shortcut" class="shortcut" :data="shortcut">
-          <div>
-            <div class="hot-key">
-              <h1 class="title">热门搜索</h1>
-               <ul>
-                 <li @click="addQuery" v-for="item in hotKey" class="item">
-                   <span></span>
-                 </li>
-               </ul>
-            </div>
+    <div ref="shortcutWrapper" class="shortcut-wrapper" v-show="!query">
+      <scroll :refreshDelay="refreshDelay" ref="shortcut" class="shortcut" :data="shortcut">
+        <div>
+          <div class="hot-key">
+            <h1 class="title">热门搜索</h1>
+            <ul>
+              <li @click="addQuery(item.k)" class="item" v-for="item in hotKey">
+                <span>{{item.k}}</span>
+              </li>
+            </ul>
           </div>
           <div class="search-history" v-show="searchHistory.length">
             <h1 class="title">
               <span class="text">搜索历史</span>
-              <span class="clear" @click="showConfirm">
+              <span @click="showConfirm" class="clear">
                 <i class="icon-clear"></i>
               </span>
             </h1>
-           <search-list @delete="deleteSearchHistory" @select="addQuery" :searchs="searchHistory"></search-list>
+            <search-list @delete="deleteSearchHistory" @select="addQuery" :searches="searchHistory"></search-list>
           </div>
-        </scroll>
-      </div>
+        </div>
+      </scroll>
     </div>
     <div class="search-result" v-show="query" ref="searchResult">
-      <suggest @listScroll="bulrInput" @select="saveSearch" ref="suggest" :query="query"></suggest>
+      <suggest @listScroll="blurInput" @select="saveSearch" ref="suggest" :query="query"></suggest>
     </div>
-    <!-- 清除歌曲历史记录 -->
     <confirm ref="confirm" @confirm="clearSearchHistory" text="是否清空所有搜索历史" confirmBtnText="清空"></confirm>
     <router-view></router-view>
   </div>
 </template>
 
-<script>
-import Scroll from 'base/scroll/scroll'
+<script type="text/ecmascript-6">
 import SearchBox from 'base/search-box/search-box'
 import SearchList from 'base/search-list/search-list'
-import Suggest from 'components/suggest/suggest'
+import Scroll from 'base/scroll/scroll'
 import Confirm from 'base/confirm/confirm'
+import Suggest from 'components/suggest/suggest'
 import { getHotKey } from 'api/search'
 import { ERR_OK } from 'api/config'
 import { playlistMixin, searchMixin } from 'common/js/mixin'
@@ -66,8 +63,12 @@ export default {
   methods: {
     handlePlaylist(playlist) {
       const bottom = playlist.length > 0 ? '60px' : ''
+
       this.$refs.searchResult.style.bottom = bottom
-      this.refs.suggest.refresh()
+      this.$refs.suggest.refresh()
+
+      this.$refs.shortcutWrapper.style.bottom = bottom
+      this.$refs.shortcut.refresh()
     },
     showConfirm() {
       this.$refs.confirm.show()
@@ -75,80 +76,103 @@ export default {
     _getHotKey() {
       getHotKey().then(res => {
         if (res.code === ERR_OK) {
-          this.hotKey = res.data.hotKey.slice(0, 10)
+          this.hotKey = res.data.hotkey.slice(0, 10)
         }
       })
     },
-    //  清除历史记录歌单
     ...mapActions(['clearSearchHistory'])
   },
   watch: {
     query(newQuery) {
-     if (!newQuery) {
-       setTimeout(() => {
-         this.$refs.shortcut.refresh()
-       }, 20)
-     }
+      if (!newQuery) {
+        setTimeout(() => {
+          this.$refs.shortcut.refresh()
+        }, 20)
+      }
     }
   },
   components: {
-    Scroll,
     SearchBox,
     SearchList,
-    Suggest,
-    Confirm
+    Scroll,
+    Confirm,
+    Suggest
   }
 }
 </script>
 
-<style lang="stylus" scoped>
- @import "~common/stylus/variable"
-  @import "~common/stylus/mixin"
+<style lang="stylus" rel="stylesheet/stylus">
+@import '~common/stylus/variable';
+@import '~common/stylus/mixin';
 
-  .search
-    .search-box-wrapper
-      margin: 20px
-    .shortcut-wrapper
-      position: fixed
-      top: 178px
-      bottom: 0
-      width: 100%
-      .shortcut
-        height: 100%
-        overflow: hidden
-        .hot-key
-          margin: 0 20px 20px 20px
-          .title
-            margin-bottom: 20px
-            font-size: $font-size-medium
-            color: $color-text-l
-          .item
-            display: inline-block
-            padding: 5px 10px
-            margin: 0 20px 10px 0
-            border-radius: 6px
-            background: $color-highlight-background
-            font-size: $font-size-medium
-            color: $color-text-d
-        .search-history
-          position: relative
-          margin: 0 20px
-          .title
-            display: flex
-            align-items: center
-            height: 40px
-            font-size: $font-size-medium
-            color: $color-text-l
-            .text
-              flex: 1
-            .clear
-              extend-click()
-              .icon-clear
-                font-size: $font-size-medium
-                color: $color-text-d
-    .search-result
-      position: fixed
-      width: 100%
-      top: 178px
-      bottom: 0
+.search {
+  .search-box-wrapper {
+    margin: 20px;
+  }
+
+  .shortcut-wrapper {
+    position: fixed;
+    top: 178px;
+    bottom: 0;
+    width: 100%;
+
+    .shortcut {
+      height: 100%;
+      overflow: hidden;
+
+      .hot-key {
+        margin: 0 20px 20px 20px;
+
+        .title {
+          margin-bottom: 20px;
+          font-size: $font-size-medium;
+          color: $color-text-l;
+        }
+
+        .item {
+          display: inline-block;
+          padding: 5px 10px;
+          margin: 0 20px 10px 0;
+          border-radius: 6px;
+          background: $color-highlight-background;
+          font-size: $font-size-medium;
+          color: $color-text-d;
+        }
+      }
+
+      .search-history {
+        position: relative;
+        margin: 0 20px;
+
+        .title {
+          display: flex;
+          align-items: center;
+          height: 40px;
+          font-size: $font-size-medium;
+          color: $color-text-l;
+
+          .text {
+            flex: 1;
+          }
+
+          .clear {
+            extend-click();
+
+            .icon-clear {
+              font-size: $font-size-medium;
+              color: $color-text-d;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .search-result {
+    position: fixed;
+    width: 100%;
+    top: 178px;
+    bottom: 0;
+  }
+}
 </style>

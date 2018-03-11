@@ -14,14 +14,14 @@
 <script>
 export default {
   props: {
-     searches: {
-       type: Array,
-       default: []
-     }    
+    searches: {
+      type: Array,
+      default: []
+    }
   },
   methods: {
     selectItem() {
-     this.$emit('select', item)
+      this.$emit('select', item)
     },
     deleteOne(item) {
       this.$emit('delete', item)
@@ -31,25 +31,36 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
- @import "~common/stylus/mixin"
+@import '~common/stylus/mixin';
 
-// extend-click扩展点击区域
-  .search-list
-    .search-item
-      display: flex
-      align-items: center
-      height: 40px
-      overflow: hidden
-      &.list-enter-active, &.list-leave-active
-        transition: all 0.1s
-      &.list-enter, &.list-leave-to
-        height: 0
-      .text
-        flex: 1
-        color: $color-text-l
-      .icon
-        extend-click()
-        .icon-delete
-          font-size: $font-size-small
-          color: $color-text-d
+.search-list {
+  .search-item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    overflow: hidden;
+
+    &.list-enter-active, &.list-leave-active {
+      transition: all 0.1s;
+    }
+
+    &.list-enter, &.list-leave-to {
+      height: 0;
+    }
+
+    .text {
+      flex: 1;
+      color: $color-text-l;
+    }
+
+    .icon {
+      extend-click();
+
+      .icon-delete {
+        font-size: $font-size-small;
+        color: $color-text-d;
+      }
+    }
+  }
+}
 </style>
