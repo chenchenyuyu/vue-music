@@ -2,6 +2,7 @@
   <div class="search-box">
     <i class="icon-search"></i>
     <input type="text" class="box" ref="query" v-model="query" :placeholder="placeholder">
+    <!-- 点击x标志清除input的值 -->
     <i class="icon-dismiss" v-show="query" @click="clear"></i>
   </div>
 </template>
@@ -10,6 +11,7 @@
 import { debounce } from 'common/js/util'
 export default {
   data() {
+    // query 为input 中的值
     return {
       query: ''
     }
